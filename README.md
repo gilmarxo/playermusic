@@ -38,7 +38,7 @@ Abra o arquivo index.html no seu navegador para visualizar o player de música.
 ## Personalização
 Você pode personalizar este player de música de acordo com suas preferências:
 
-Altere as variáveis musicTitle e artistName no arquivo script.js para exibir informações de diferentes músicas.
+Altere as variáveis no arquivo script.js para exibir informações de diferentes músicas.
 Modifique a estilização no arquivo style.css para criar a aparência desejada.
 
 ## Contribuições
