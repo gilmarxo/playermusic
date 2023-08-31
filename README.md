@@ -4,7 +4,7 @@ Bem-vindo à documentação do Player de Música em JavaScript! Este repositóri
 
 Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](https://github.com/gilmarxo/playermusic/blob/main/assets/img/player-music.png?raw=true)
 
 
 ## Visão Geral
