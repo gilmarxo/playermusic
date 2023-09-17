@@ -1,3 +1,4 @@
+// Selecionar elementos HTML usando seus IDs ou classes
 const audio = document.querySelector('#audio')
 const source = document.querySelector('#source')
 const play = document.querySelector('#play')
@@ -16,34 +17,45 @@ const volumeButton = document.querySelector('#volume-button')
 const volume = document.querySelector('.volume')
 const body = document.getElementsByTagName('body')
 
-//Variable/Constant
-let isPlaying = false;
-let isShuffled = false;
-let isRepeatd = false;
-let isLikend = false;
+// Variáveis e constantes de controle
+let isPlaying = false; // Indica se a música está tocando
+let isShuffled = false; // Indica se a lista de reprodução está embaralhada
+let isRepeatd = false; // Indica se a repetição está ativada
 
-let playList = [];
-let sortPlayList = [...playList]
-let index = 0;
-let countTrack = 1;
-let volumeValue = 0
+let playList = []; // Lista de reprodução de músicas
+let sortPlayList = [...playList]; // Lista de reprodução ordenada
+let index = 0; // Índice da faixa atual
+let countTrack = 1; // Contador de faixas
+let volumeValue = 0; // Valor do volume
 
-
-//Events
+// Adicionar ouvintes de eventos aos elementos HTML
+// Botão de reprodução/pausa
 play.addEventListener('click', playOrPause);
+
+// Evento de atualização do tempo de reprodução do áudio
 audio.addEventListener('timeupdate', () => {
     updateProgressBar();
     nextTrack();
 });
+
+// Botão de faixa anterior
 previous.addEventListener('click', previousSong);
+
+// Botão de próxima faixa
 next.addEventListener('click', nextSong);
+
+// Botão de embaralhar
 shuffle.addEventListener('click', shuffleActive);
+
+// Botão de repetir
 repeat.addEventListener('click', repeatActive);
+
+// Barra de progresso (permite clicar para pular)
 progressContainer.addEventListener('click', jumpTo);
 
-//Button Open File
+// Botão de seleção de arquivo
 btnSelectFile.addEventListener("click", () => {
-    playList = []
+    playList = [];
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = '.mp3, .wav';
@@ -51,62 +63,62 @@ btnSelectFile.addEventListener("click", () => {
     input.webkitdirectory = false;
 
     input.addEventListener('change', (event) => {
-        const file = event.target.files
+        const file = event.target.files;
         sendFiles(file);
     });
     input.click();
 });
 
-volumeButton.addEventListener('click', volumeMute)
+// Botão de controle de volume
+volumeButton.addEventListener('click', volumeMute);
 
+// Controle deslizante de volume
 volume.addEventListener('click', (e) => {
-    const value = e.target.value
-    const vlr = document.querySelector('#volume-vl')
-    vlr.innerHTML = value
+    const value = e.target.value;
+    const vlr = document.querySelector('#volume-vl');
+    vlr.innerHTML = value;
     audio.volume = value / 100;
-})
+});
 
-//Function
-//Open file
+// Função para abrir arquivos de áudio
 function sendFiles(file) {
     let content = '';
-    let index = 1
+    let index = 1;
     Array.from(file).forEach(file => {
-        content += `<source src="${URL.createObjectURL(file)}" id="tarck-${index++}" track="${index}"/>`
-        //Salvando dados na PlayList
-        playList.push(file)
-    })
-    sortPlayList = [...playList]
+        content += `<source src="${URL.createObjectURL(file)}" id="tarck-${index++}" track="${index}"/>`;
+        // Salvando dados na lista de reprodução
+        playList.push(file);
+    });
+    sortPlayList = [...playList];
     initializeMusic();
     playSong();
-
 }
 
-//MetaData File
+// Função para acessar os metadados do arquivo
 function accessMetadata(file) {
-
     jsmediatags.read(file, {
-
         onSuccess: function (tag) {
             try {
-                const data = tag.tags.picture.data
-                const format = tag.tags.picture.format
-                let base64String = ""
+                const data = tag.tags.picture.data;
+                const format = tag.tags.picture.format;
+                let base64String = "";
                 for (let i = 0; i < data.length; i++) {
-                    base64String += String.fromCharCode(data[i])
+                    base64String += String.fromCharCode(data[i]);
                 }
-                displayMetadata(`url(data:${format};base64,${window.btoa(base64String)})`, tag.tags.title, tag.tags.artist, tag.tags.album)
+                displayMetadata(`url(data:${format};base64,${window.btoa(base64String)})`, tag.tags.title, tag.tags.artist, tag.tags.album);
             } catch (error) {
-                //"url(music.jpg)"
-                displayMetadata(`url(${coverSongs})`, nameSongs(file.name), "Artista:", "Album:")
+                // Usar imagem padrão caso não haja imagem nos metadados
+                displayMetadata(`url(${coverSongs})`, nameSongs(file.name), "Artista:", "Álbum:");
             }
         },
         onError: function (error) {
-            displayMetadata("url(music.jpg)", upload.value.split(/(\\|\/)/g).pop(), "Unknown", "Unknown")
+            // Usar imagem padrão em caso de erro
+            displayMetadata("url(music.jpg)", upload.value.split(/(\\|\/)/g).pop(), "Desconhecido", "Desconhecido");
         }
-    })
+    });
 }
-//regex 
+
+// Função para extrair o nome da música a partir do nome do arquivo
 function nameSongs(nome) {
     const regex = /.mp3$/gm;
     const str = nome;
@@ -115,31 +127,34 @@ function nameSongs(nome) {
     return result;
 }
 
+// Função para exibir metadados da música
 function displayMetadata(cover, title, artist, album) {
-    
-    const span = document.createAttribute('span')
+    const span = document.createAttribute('span');
 
-    document.querySelector("#cover").style.backgroundImage = cover
-    document.querySelector("#txtTitle").textContent = title
-    document.querySelector("#artist").textContent = artist
-    document.querySelector("#album").textContent = album
+    document.querySelector("#cover").style.backgroundImage = cover;
+    document.querySelector("#txtTitle").textContent = title;
+    document.querySelector("#artist").textContent = artist;
+    document.querySelector("#album").textContent = album;
 }
-//inicializar play
+
+// Função para inicializar a reprodução da música
 function initializeMusic() {
     audio.src = URL.createObjectURL(sortPlayList[index]);
-    accessMetadata(sortPlayList[index])
+    accessMetadata(sortPlayList[index]);
     audio.addEventListener('loadeddata', () => {
         timeEnd.textContent = segundsForMinuts(Math.floor(audio.duration));
-
-    })
+    });
 }
-//Controller Play
+
+// Função para iniciar a reprodução da música
 function playSong() {
     play.querySelector('.bi').classList.remove('bi-play-circle-fill');
     play.querySelector('.bi').classList.add('bi-pause-circle-fill');
     audio.play();
     isPlaying = true;
 }
+
+// Função para pausar a reprodução da música
 function pauseSong() {
     play.querySelector('.bi').classList.remove('bi-pause-circle-fill');
     play.querySelector('.bi').classList.add('bi-play-circle-fill');
@@ -147,6 +162,7 @@ function pauseSong() {
     isPlaying = false;
 }
 
+// Função para alternar entre reprodução e pausa
 function playOrPause() {
     if (isPlaying === false && sortPlayList.length != []) {
         playSong();
@@ -155,30 +171,29 @@ function playOrPause() {
     }
 }
 
-//Controller Previous
+// Função para ir para a faixa anterior
 function previousSong() {
     if (index === 0) {
         index = sortPlayList.length - 1;
-    }
-    else {
+    } else {
         index -= 1;
     }
     initializeMusic();
     playSong();
 }
 
-//Controller Next
+// Função para ir para a próxima faixa
 function nextSong() {
     if (index === sortPlayList.length - 1) {
         index = 0;
     } else {
         index += 1;
-
     }
     initializeMusic();
     playSong();
 }
 
+// Função para ativar ou desativar o mudo
 function volumeMute() {
     if (audio.muted) {
         audio.muted = false;
@@ -191,12 +206,11 @@ function volumeMute() {
     }
 }
 
-//Controller Shuffle
-//Shuffle PlayList Bubble sort
+// Função para embaralhar a lista de reprodução (Bubble sort)
 function shuffleArray(ordemPlayList) {
     const size = ordemPlayList.length;
     let currentIndex = size - 1;
-    let randomIndex = 0
+    let randomIndex = 0;
     while (currentIndex > 0) {
         randomIndex = Math.floor(Math.random() * size);
         let aux = ordemPlayList[currentIndex];
@@ -206,6 +220,7 @@ function shuffleArray(ordemPlayList) {
     }
 }
 
+// Função para ativar ou desativar o modo de reprodução aleatória
 function shuffleActive() {
     if (isShuffled === false) {
         isShuffled = true;
@@ -218,26 +233,25 @@ function shuffleActive() {
     }
 }
 
-
-//Controller Repeat
+// Função para ativar ou desativar o modo de repetição
 function repeatActive() {
     if (isRepeatd === false) {
         isRepeatd = true;
-        sortPlayList.sort()
-        repeat.classList.add('button-active-controller')
+        sortPlayList.sort();
+        repeat.classList.add('button-active-controller');
     } else {
-        sortPlayList.reverse()
+        sortPlayList.reverse();
         isRepeatd = false;
-        repeat.classList.remove('button-active-controller')
+        repeat.classList.remove('button-active-controller');
     }
 }
 
-//next Track
+// Função para avançar para a próxima faixa quando a atual terminar
 function nextTrack() {
     if (audio.duration === audio.currentTime) {
         if (countTrack < sortPlayList.length) {
             countTrack += 1;
-            nextSong()
+            nextSong();
         } else {
             pauseSong();
         }
@@ -245,16 +259,16 @@ function nextTrack() {
     if (audio.duration === audio.currentTime && isRepeatd === true) {
         nextSong();
     }
-
 }
 
-//Barra de progresso
+// Função para atualizar a barra de progresso
 function updateProgressBar() {
     progressBar.style.width = Math.floor((audio.currentTime / audio.duration) * 100) + '%';
     timeStart.textContent = segundsForMinuts(Math.floor(audio.currentTime));
     timeEnd.textContent = segundsForMinuts(Math.floor(audio.duration - audio.currentTime));
 }
-//Permite click na barra de progresso
+
+// Função para permitir clicar na barra de progresso para pular para uma posição específica
 function jumpTo(event) {
     const width = progressContainer.clientWidth;
     const clickPosition = event.offsetX;
@@ -262,7 +276,7 @@ function jumpTo(event) {
     audio.currentTime = jumpToTime;
 }
 
-//Converter segundos para minutos
+// Função para converter segundos em minutos no formato "MM:SS"
 function segundsForMinuts(segunds) {
     let frmMinuts = Math.floor(segunds / 60);
     let frmSegunds = segunds % 60;
@@ -271,4 +285,3 @@ function segundsForMinuts(segunds) {
     }
     return frmMinuts + ':' + frmSegunds;
 }
-
