@@ -13,12 +13,12 @@
     <div class="music-container">
 
         <h3 id="playlist-title">Player de Música</h3>
-        <!--Cover Display-->
+        <!-- Seção para exibir a capa do álbum -->
         <div id="cover"></div>
         <audio id="audio">
             <source src="" id="src" track="" />
-        </audio> 
-        <!--Info Music-->
+        </audio>
+        <!-- Informações sobre a música -->
         <div id="below-cover">
             <div id="song-info">
                 <div id="title" class="marquee"><span id="txtTitle">Meu Play de Música</span></div>
@@ -26,28 +26,28 @@
                 <div id="album" class="light-color">Album</div>
             </div>
             <div id="actions-file">
+                <!-- Botão para selecionar um arquivo de áudio -->
                 <button type="button" id="selectFile" class="button"><i class="bi bi-music-note-list"></i></button>
-                    
+
                 <div class="volume-container">
-                        
-                        <div class="volume-button">
-                            <button type="button" id="volume-button" class="button">
-                                <i class="bi bi-volume-up-fill"></i>
-                            </button>
-                            
-                        </div>
-                        
-                        <div class="volume-control">
-                            <input class="volume" type="range" value="100" max="100">
-                        </div>
-                        <div>
-                            <span id="volume-vl">100</span>
-                        </div>
+                    <!-- Botão de controle de volume -->
+                    <div class="volume-button">
+                        <button type="button" id="volume-button" class="button">
+                            <i class="bi bi-volume-up-fill"></i>
+                        </button>
                     </div>
-                    
+
+                    <!-- Controle deslizante de volume -->
+                    <div class="volume-control">
+                        <input class="volume" type="range" value="100" max="100">
+                    </div>
+                    <div>
+                        <span id="volume-vl">100</span>
+                    </div>
+                </div>
             </div>
         </div>
-        <!--Progress Bar-->
+        <!-- Barra de progresso da música -->
         <div id="progress-container">
             <div id="progress-bar">
                 <div class="progress-current-bar">
@@ -55,18 +55,16 @@
                 </div>
             </div>
         </div>
-        <!--Progress time-->
+        <!-- Tempo de reprodução atual -->
         <div class="time">
             <p class="time-start">--:--</p>
             <p class="time-end">--:--</p>
         </div>
-        <!--Controlls Button-->
+        <!-- Botões de controle de reprodução -->
         <div id="button-controller">
             <button type="button" id="shuffle" class="button"><i class="bi bi-shuffle"></i></button>
-            <button type="button" id="previous" class="button button-navigate"><i
-                    class="bi bi-skip-start-fill"></i></button>
-            <button type="button" id="play" class="button button-biggest"><i
-                    class="bi bi-play-circle-fill"></i></button>
+            <button type="button" id="previous" class="button button-navigate"><i class="bi bi-skip-start-fill"></i></button>
+            <button type="button" id="play" class="button button-biggest"><i class="bi bi-play-circle-fill"></i></button>
             <button type="button" id="next" class="button button-navigate"><i class="bi bi-skip-end-fill"></i></button>
             <button type="button" id="repeat" class="button"><i class="bi bi-repeat"></i></button>
         </div>
@@ -76,4 +74,3 @@
 </body>
 
 </html>
-

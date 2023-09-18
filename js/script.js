@@ -9,7 +9,6 @@ const repeat = document.querySelector('#repeat')
 const progressBar = document.querySelector('.progress-current-bar')
 const timeStart = document.querySelector('.time-start')
 const timeEnd = document.querySelector('.time-end')
-const like = document.querySelector('#like')
 const btnSelectFile = document.querySelector('#selectFile')
 const coverSongs = './assets/img/coverPlayer.png'
 const progressContainer = document.querySelector('#progress-container')

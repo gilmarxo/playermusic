@@ -1,5 +1,7 @@
+/* Importando os ícones Bootstrap para uso no projeto */
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
 
+/* Definindo variáveis de cor usando a pseudo-classe :root */
 :root {
     --light-color: rgb(139, 153, 156);
     --button-color: rgb(247, 247, 247);
@@ -9,6 +11,7 @@
     --primary-color: rgb(255, 255, 255);
 }
 
+/* Estilos gerais para o HTML e o corpo da página */
 html,
 body {
     background-image: linear-gradient(var(--bg-color-one), var(--bg-color-two));
@@ -22,26 +25,30 @@ body {
     align-items: center;
 }
 
+/* Estilos para o container principal da música */
 .music-container {
     margin-top: 2em;
     width: 450px;
-
 }
 
+/* Estilos para a capa do álbum */
 #cover {
     background-image: url("../assets/img/coverPlayer.png");
 }
 
+/* Estilos para botões */
 button {
     background-color: inherit;
     color: inherit;
     border: none;
 }
 
+/* Estilos para botões ativos */
 .button-active-controller {
     color: var(--button-active);
 }
 
+/* Estilo para container geral */
 #container {
     display: flex;
     flex-direction: column;
@@ -49,14 +56,15 @@ button {
     margin: 10px;
 }
 
+/* Estilos para o container abaixo da capa */
 #below-cover {
     display: flex;
     flex-direction: row;
     align-items: end;
     margin: 2em 0 2.5em 0;
-
 }
 
+/* Estilos para informações da música */
 #song-info {
     display: flex;
     flex-direction: column;
@@ -64,12 +72,14 @@ button {
     width: 350px;
 }
 
+/* Estilos para o título da música */
 #title {
     font-weight: bold;
     font-size: 1.8em;
     margin-left: .2em;
 }
 
+/* Estilos para ações de arquivo de música */
 #actions-file {
     display: flex;
     flex-direction: row;
@@ -78,26 +88,28 @@ button {
     margin-bottom: -1.5em;
 }
 
-
+/* Estilos para o controle de volume */
 .volume-container {
     display: inline-block;
     position: relative;
-
+    /* Mostrar o controle de volume ao passar o mouse sobre ele */
     &:hover .volume-control {
         display: block;
     }
 }
 
+/* Estilos para a exibição do volume */
 #volume-vl {
     padding-left: .5em;
     font-size: 10pt;
 }
 
+/* Estilos para o controle deslizante de volume */
 .volume-control {
     position: absolute;
     display: none;
     width: 2.3em;
-
+    /* Estilos para o controle deslizante */
     .volume {
         all: unset;
         border: none;
@@ -108,13 +120,12 @@ button {
     }
 }
 
-
+/* Estilos para a rotação do controle de volume */
 .volume-control {
     rotate: 270deg;
 }
 
-
-
+/* Estilos para o controle de botões de reprodução */
 #button-controller {
     display: flex;
     flex-direction: row;
@@ -123,18 +134,22 @@ button {
     padding: 0;
 }
 
+/* Estilos gerais para botões */
 .button {
     font-size: 1.5em;
 }
 
+/* Estilos para botões de navegação */
 .button-navigate {
     font-size: 3em;
 }
 
+/* Estilos para o maior botão de reprodução */
 .button-biggest {
     font-size: 4em;
 }
 
+/* Estilos para a capa do álbum */
 #cover {
     border-color: var(--primary-color);
     border-style: solid;
@@ -142,9 +157,9 @@ button {
     background-size: cover;
     width: 450px;
     height: 450px;
-
 }
 
+/* Estilos para o título da lista de reprodução */
 #playlist-title {
     display: flex;
     flex-direction: row;
@@ -152,18 +167,20 @@ button {
     margin: 1em 0 2em 0;
 }
 
+/* Estilos para cores mais claras */
 .light-color {
     color: var(--light-color);
 }
 
+/* Estilos para a barra de progresso */
 #progress-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
     justify-items: center;
-
 }
 
+/* Estilos para a barra de progresso */
 #progress-bar {
     background-color: var(--light-color);
     height: 5px;
@@ -172,6 +189,7 @@ button {
     margin-bottom: 1em;
 }
 
+/* Estilos para a parte atual da barra de progresso */
 .progress-current-bar {
     background-color: var(--button-color);
     height: inherit;
@@ -179,6 +197,7 @@ button {
     border-radius: inherit;
 }
 
+/* Estilos para o ponto de progresso na barra */
 #point {
     background-color: var(--button-color);
     width: 15px;
@@ -189,26 +208,29 @@ button {
     top: -100%;
 }
 
+/* Estilos para a exibição de tempo */
 .time {
     display: flex;
     width: inherit;
     margin-top: -1em;
     justify-content: space-between;
-
 }
 
+/* Estilos para a animação de rolagem de texto */
 .marquee {
     overflow: hidden;
     white-space: nowrap;
     padding: .2em;
 }
 
+/* Estilos para a animação de rolagem de texto */
 .marquee span {
     display: inline-block;
     padding-left: 50%;
     animation: marquee 15s linear infinite;
 }
 
+/* Animação de rolagem de texto */
 @keyframes marquee {
     0% {
         transform: translate(0, 0);
