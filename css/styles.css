@@ -26,7 +26,7 @@ body {
 }
 
 /* Estilos para o container principal da música */
-.music-container {
+.player-container {
     margin-top: 2em;
     width: 450px;
 }
@@ -46,14 +46,6 @@ button {
 /* Estilos para botões ativos */
 .button-active-controller {
     color: var(--button-active);
-}
-
-/* Estilo para container geral */
-#container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 10px;
 }
 
 /* Estilos para o container abaixo da capa */
