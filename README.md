@@ -49,11 +49,12 @@ Este projeto está licenciado sob a Licença MIT.
 
 Esperamos que este projeto ajude você a entender e praticar a criação de um player de música em JavaScript. Divirta-se explorando e desenvolvendo suas habilidades de programação! Se tiver alguma dúvida, fique à vontade para entrar em contato.
 
-Criado com ❤️ pela equipe de desenvolvimento da "Conexão Dev".
+Criado com ❤️ por Gilmar Xavier do Canal Youtube "Conexão Dev".
 
 ## Autor github
-
+### Gilmar Xavier
 - [@gilmarxo](https://www.github.com/gilmarxo)
+- [Canal Conexão Dev](https://www.youtube.com/@Conexaodev)
 
 
 
